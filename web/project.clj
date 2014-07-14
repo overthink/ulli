@@ -1,4 +1,4 @@
-(defproject web "1.0-SNAPSHOT"
+(defproject lists/web "1.0-SNAPSHOT"
   :description "Make some lists"
   :dependencies [[org.clojure/clojure "1.5.1"]
                  ;;[org.clojure/tools.cli "0.3.1"]
