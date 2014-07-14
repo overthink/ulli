@@ -1,6 +1,13 @@
 BEGIN;
 
--- TODO: everything
+-- wanted to call this user, but that's a reserved word
+CREATE TABLE account (
+  id BIGSERIAL NOT NULL PRIMARY KEY,
+  username TEXT NOT NULL,
+  password_hash TEXT,  -- yes, can be null (for low-friction sign up)
+  email TEXT,
+  created TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
 
 CREATE TABLE list (
   id BIGSERIAL NOT NULL PRIMARY KEY,

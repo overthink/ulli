@@ -3,14 +3,8 @@
   (:require
     [clojure.pprint :refer [pprint]]
     [ring.util.response :refer [response redirect]]
-    [ring.util.codec :refer [form-encode]]
     [ring.middleware.session :refer [wrap-session]]
     [ring.middleware.params :refer [wrap-params]]
-    [net.cgrand.enlive-html :as html :refer [do->
-                                             defsnippet
-                                             content
-                                             set-attr
-                                             clone-for]]
     [lists.web.db :as db]
     [lists.web.util :as util]
     [compojure.route :as route]

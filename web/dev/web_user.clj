@@ -9,16 +9,8 @@
     [clojure.reflect :refer [reflect]]
     [clojure.test :refer [run-all-tests]]
     [clojure.walk :refer [macroexpand-all]]
-    [net.cgrand.reload :refer [auto-reload]]
     lists.web.db
     lists.web.main))
-
-;; Auto-reload enlive resources (HTML files) loaded in select namespaces
-;; auto-reload is badly behaved, causes JVM to hang, working on it
-;; https://github.com/overthink/enlive/commit/714867c8712366ae7d6210262eeac018975403c1
-(when (get (System/getenv) "ENLIVERELOAD")
-  (println "Starting badly behaved auto-reloader")
-  (auto-reload (find-ns 'lists.web.web)))
 
 ;; Prevent this ns from being reloaded by `reset` below.  This prevents us
 ;; from "losing" this namespace due to syntax errors in other parts of the
@@ -29,8 +21,6 @@
 ;; Holds the current system instance. Used in dev mode only.  This is defonce
 ;; so we avoid losing its contents if the namespace is re-evaluated.
 (defonce system nil)
-
-(comment test)
 
 (defn init
   "Constucts a new dev system and puts it in the system global var."
