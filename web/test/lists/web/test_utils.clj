@@ -9,7 +9,7 @@
   to sym and excutes body in this context.  Tears the whole thing down at the
   end and returns nil."
   [sym & body]
-  `(db/with-empty-db "lists/web/schema/lists.sql"
+  `(db/with-empty-db "web/schema/lists.sql"
      (fn [dbname#]
        (let [config# (assoc (config/config)
                             :port (db/find-free-port)
