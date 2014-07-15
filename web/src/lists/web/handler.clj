@@ -2,6 +2,7 @@
   "Main Ring handler for the app."
   (:require
     [clojure.pprint :refer [pprint]]
+    [clojure.java.io :as io]
     [ring.util.response :refer [response redirect]]
     [ring.middleware.session :refer [wrap-session]]
     [ring.middleware.params :refer [wrap-params]]
@@ -14,7 +15,9 @@
     org.joda.time.DateTime))
 
 (defroutes routes
-  (GET "/" [] "yo"))
+  (route/resources "/")
+  (GET "*" [] (io/resource "public/index.html")) ;; could/should eventually liberate the ng app from this project
+  (route/not-found "Computer said no."))
 
 (defn wrap-system
   "Adds the system to the request under the :system key."
