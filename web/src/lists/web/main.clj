@@ -8,7 +8,8 @@
     [lists.web.config :as config]
     [lists.web.util :refer [exit str->int default-postgres-port]]
     [lists.clj-log.log :as log]
-    [ring.adapter.jetty :refer [run-jetty]])
+    [ring.adapter.jetty :refer [run-jetty]]
+    [lists.web.pgsession :refer [pg-session-store]])
   (:import
     org.eclipse.jetty.server.Server))
 
@@ -16,12 +17,14 @@
   "Return a map of all the components needed to start the system.  config is a
   map of configuration values.  Note that the system is not yet started."
   [config]
+  (let [ds (db/datasource (:db-host config)
+                          (:db-port config)
+                          (:db-user config)
+                          (:db-pass config)
+                          (:db-name config))]
   {:config config
-   :datasource (db/datasource (:db-host config)
-                              (:db-port config)
-                              (:db-user config)
-                              (:db-pass config)
-                              (:db-name config))})
+   :datasource ds
+   :session-store (pg-session-store ds)}))
 
 (defn start
   "Start all the components of the system.  Returns a new system."

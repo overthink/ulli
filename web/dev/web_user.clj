@@ -74,6 +74,7 @@
   call commit. e.g.  (with-conn c (db/my-thing-needing-connection c))."
   [conn-sym & body]
   `(with-open [~conn-sym (lists.web.db/conn (:datasource system))]
-     ~@body
-     (.commit ~conn-sym)))
+     (let [result# ~@body]
+       (.commit ~conn-sym)
+       result#)))
 

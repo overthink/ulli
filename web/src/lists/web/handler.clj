@@ -30,7 +30,8 @@
   [system]
   (-> (var routes)
       (wrap-system system)
-      (wrap-session {:cookie-name "sid"
+      (wrap-session {:store (:session-store system)
+                     :cookie-name "sid"
                      :cookie-attrs {:path "/"
                                     :http-only true
                                     :max-age 3600}})
